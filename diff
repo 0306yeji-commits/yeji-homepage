@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>김예지의 개인 홈페이지</title>
+
+  <!-- 웹폰트 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg1:#0b1020;
+      --bg2:#0f1633;
+      --glass: rgba(255,255,255,.07);
+      --glass2: rgba(255,255,255,.10);
+      --stroke: rgba(255,255,255,.14);
+      --text:#eef2ff;
+      --muted:rgba(238,242,255,.72);
+      --accent:#7c3aed;
+      --accent2:#22c55e;
+      --shadow: 0 18px 42px rgba(0,0,0,.40);
+      --radius: 22px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family:"Noto Sans KR", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(900px 600px at 10% 10%, rgba(124,58,237,.35), transparent 60%),
+        radial-gradient(900px 600px at 90% 20%, rgba(34,197,94,.25), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+    }
+
+    header{
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(12px);
+      background: rgba(10,16,32,.65);
+      border-bottom: 1px solid rgba(255,255,255,.10);
+    }
+
+    .topbar{
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 16px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .brand{
+      display:flex;
+      flex-direction:column;
+      line-height:1.1;
+    }
+    .brand .ko{
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -.2px;
+    }
+    .brand .en{
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: .4px;
+    }
+
+    .nav{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .nav button{
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: .18s ease;
+    }
+    .nav button:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.12);
+      border-color: rgba(255,255,255,.20);
+    }
+    .nav button.active{
+      background: linear-gradient(90deg, rgba(124,58,237,.85), rgba(34,197,94,.55));
+      border-color: rgba(255,255,255,.20);
+    }
+
+    .wrap{
+      max-width: 1040px;
+      margin: 26px auto 60px;
+      padding: 0 18px;
+    }
+
+    .hero{
+      position: relative;
+      padding: 22px;
+      border-radius: var(--radius);
+      background:
+        radial-gradient(520px 280px at 10% 10%, rgba(124,58,237,.30), transparent 60%),
+        radial-gradient(520px 280px at 70% 40%, rgba(34,197,94,.18), transparent 60%),
+        rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: var(--shadow);
+      margin-bottom: 16px;
+    }
+
+    .kicker{
+      display:inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.14);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .headline{
+      margin: 14px 0 10px;
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: -.6px;
+    }
+
+    .lead{
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 15px;
+    }
+
+    .content{ display:none; }
+    .content.active{ display:block; }
+
+    .panel{
+      background: var(--glass);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+
+    .section-title{
+      font-size: 18px;
+      font-weight: 800;
+      margin: 0 0 12px;
+      letter-spacing: -.2px;
+    }
+    .section-title::before{
+      content:"";
+      display:inline-block;
+      width:10px;height:10px;
+      border-radius: 999px;
+      margin-right: 10px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      vertical-align: middle;
+    }
+
+    ul{
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.85;
+      font-size: 15px;
+    }
+    ul li{ padding: 4px 0; }
+
+    table{
+      width:100%;
+      border-collapse: collapse;
+      overflow:hidden;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.10);
+    }
+    th, td{
+      padding: 12px 12px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      font-size: 14px;
+    }
+    th{
+      color: var(--text);
+      background: rgba(255,255,255,.08);
+      font-weight: 700;
+    }
+    td{ color: var(--muted); }
+    tr:last-child td{ border-bottom: none; }
+
+    .link-chip{
+      display:inline-block;
+      margin-top: 14px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.08);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 700;
+      transition: .18s ease;
+    }
+    .link-chip:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.14);
+      border-color: rgba(255,255,255,.22);
+    }
+
+    /* ✅ 연락처: 위아래(1열)로 */
+    .contact-grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .info{
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.07);
+    }
+    .info .label{
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .info .value{
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    footer{
+      text-align:center;
+      color: rgba(238,242,255,.55);
+      font-size: 12px;
+      padding: 26px 0;
+    }
+
+    @media (max-width: 860px){
+      .headline{ font-size: 28px; }
+    }
+  </style>
+
+  <script>
+    function showPage(id){
+      document.querySelectorAll('.content').forEach(p => p.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+
+      document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+      const btn = document.querySelector(`[data-target="${id}"]`);
+      if(btn) btn.classList.add('active');
+
+      const hero = document.getElementById('introHero');
+      if(hero) hero.style.display = (id === 'intro') ? 'block' : 'none';
+
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    window.addEventListener('DOMContentLoaded', () => showPage('intro'));
+  </script>
+</head>
+
+<body>
+  <header>
+    <div class="topbar">
+      <div class="brand">
+        <div class="ko">김예지의 개인 홈페이지</div>
+        <div class="en">KIM YEJI · Personal Homepage</div>
+      </div>
+
+      <div class="nav">
+        <button class="active" data-target="intro" onclick="showPage('intro')">소개</button>
+        <button data-target="hobby" onclick="showPage('hobby')">취미</button>
+        <button data-target="edu" onclick="showPage('edu')">학력</button>
+        <button data-target="contact" onclick="showPage('contact')">연락처</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="introHero" class="hero">
+      <span class="kicker">안내</span>
+      <div class="headline">Welcome 👋</div>
+      <p class="lead">상단 메뉴를 눌러 소개 · 취미 · 학력 · 연락처 정보를 확인할 수 있어요.</p>
+    </section>
+
+    <section id="intro" class="content active">
+      <div class="panel">
+        <div class="section-title">소개</div>
+        <p class="lead">
+          안녕하세요. 영남대학교 국어국문학과에 재학 중인 김예지입니다.<br>
+          글을 쓰고 말하는 것을 좋아하며, 생각과 일상을 정리하고 표현하는 데 관심이 있습니다.<br>
+          이 홈페이지는 저를 간단히 소개하고, 취미와 학력, 연락처를 정리한 개인 홈페이지입니다.
+        </p>
+      </div>
+    </section>
+
+    <section id="hobby" class="content">
+      <div class="panel">
+        <div class="section-title">취미</div>
+        <ul>
+          <li>웹소설을 통해 다양한 이야기와 세계관을 접하는 것을 좋아합니다.</li>
+          <li>맛있는 음식을 먹으며 일상의 소소한 즐거움을 발견합니다.</li>
+          <li>사진을 찍으며 순간을 기록하고, 기억을 남깁니다.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="edu" class="content">
+      <div class="panel">
+        <div class="section-title">학력</div>
+        <p class="lead" style="margin:0 0 12px;">현재 영남대학교 국어국문학과에 재학 중입니다.</p>
+
+        <table>
+          <tr>
+            <th>학교</th>
+            <th>구분</th>
+          </tr>
+          <tr>
+            <td>동홍초등학교</td>
+            <td>초등</td>
+          </tr>
+          <tr>
+            <td>서귀중앙여자중학교</td>
+            <td>중등</td>
+          </tr>
+          <tr>
+            <td>서귀포여자고등학교</td>
+            <td>고등</td>
+          </tr>
+          <tr>
+            <td>영남대학교</td>
+            <td>대학교</td>
+          </tr>
+        </table>
+
+        <a class="link-chip" href="https://www.yu.ac.kr/korean/index.do" target="_blank">
+          영남대학교 국어국문학과 홈페이지 →
+        </a>
+      </div>
+    </section>
+
+    <section id="contact" class="content">
+      <div class="panel">
+        <div class="section-title">연락처</div>
+        <div class="contact-grid">
+          <div class="info">
+            <div class="label">전화번호</div>
+            <div class="value">010-9539-8831</div>
+          </div>
+          <div class="info">
+            <div class="label">이메일</div>
+            <div class="value">0306yeji@naver.com</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>© 2025 Kim Yeji</footer>
+  </main>
+</body>
+</html>
